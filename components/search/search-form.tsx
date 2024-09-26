@@ -9,14 +9,8 @@ import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import { MdKeyboardVoice } from "react-icons/md";
 import { useRouter } from "next/navigation";
-
-type Props = {
-  showButtons?: boolean;
-};
-const searchSchema = z.object({
-  inputSearch: z.string(),
-});
-const SearchForm = ({ showButtons }: Props) => {
+import { searchSchema } from "@/utils/search-schema";
+const HomeSearch = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
@@ -26,9 +20,8 @@ const SearchForm = ({ showButtons }: Props) => {
   });
 
   const onSubmit = (data: z.infer<typeof searchSchema>) => {
-    if (data.inputSearch.trim().length < 1) return;
     const { inputSearch } = data;
-    console.log(inputSearch);
+    if (inputSearch.trim().length < 1) return;
     router.push(`/search/web?searchTerm=${inputSearch}`);
   };
   return (
@@ -62,22 +55,19 @@ const SearchForm = ({ showButtons }: Props) => {
               </FormItem>
             )}
           />
-          {showButtons && (
-            <div className="flex items-center gap-4">
-              <Button variant={"outline"} className="rounded-none">
-                Google Search
-              </Button>
-              <Button variant={"outline"} asChild className="rounded-none">
-                <Link href="https://doodles.google/">
-                  {"I'm Feeling Lucky"}
-                </Link>
-              </Button>
-            </div>
-          )}
+
+          <div className="flex items-center gap-4">
+            <Button variant={"outline"} className="rounded-none">
+              Google Search
+            </Button>
+            <Button variant={"outline"} asChild className="rounded-none">
+              <Link href="https://doodles.google/">{"I'm Feeling Lucky"}</Link>
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
   );
 };
 
-export default SearchForm;
+export default HomeSearch;
