@@ -8,7 +8,7 @@ export default function Home() {
     <div className="container px-2 mx-auto ">
       <HomeHeader />
       <div className="flex flex-col items-center justify-center mt-24">
-        <GoogleLogo />
+        <GoogleLogo className="text-5xl" />
         <SearchForm showButtons/>
       </div>
     </div>
