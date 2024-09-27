@@ -1,15 +1,20 @@
+import NoSearchResult from "@/components/search/result-not-found";
 import dotenv from "dotenv";
 dotenv.config();
 
 const WebPage = async ({ searchParams }) => {
   const q = searchParams.searchTerm;
-
-  const res = await fetch(
+  const results = await fetch(
     `https://www.googleapis.com/customsearch/v1?key=${process.env.SEARCH_API_KEY}&cx=${process.env.CX_KEY}&q=${q}`,
-  );
-  const data = await res.json();
-  const results = data.items;
-  console.log(results);
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data.items;
+    })
+    .catch((error) => {
+      throw new Error("Network response was not ok", error);
+    });
+  if (!results) return <NoSearchResult query={q} />;
 
   return (
     <div>
