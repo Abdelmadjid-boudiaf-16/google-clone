@@ -1,4 +1,5 @@
 import NoSearchResult from "@/components/search/result-not-found";
+import WebSearchResults from "@/components/search/web-search-results";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,7 +10,7 @@ const WebPage = async ({ searchParams }) => {
   )
     .then((res) => res.json())
     .then((data) => {
-      return data.items;
+      return data;
     })
     .catch((error) => {
       throw new Error("Network response was not ok", error);
@@ -18,7 +19,7 @@ const WebPage = async ({ searchParams }) => {
 
   return (
     <div>
-      {results?.map((item, index) => <div key={index}>{item.title}</div>)}
+      <WebSearchResults results={results} />
     </div>
   );
 };

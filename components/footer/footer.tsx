@@ -32,7 +32,7 @@ const secondLinksList = [
 ];
 const Footer = () => {
   return (
-    <footer className="absolute bottom-0 w-full bg-muted">
+    <footer className="w-full bg-muted">
       <div className="container mx-auto px-2 py-4">
         <Country />
         <div className="my-2 w-full border border-muted-foreground/20" />
