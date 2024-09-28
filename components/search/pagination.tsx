@@ -14,7 +14,7 @@ const SearchPagination = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("searchTerm");
-  const startIndex = +searchParams.get("start") || 1;
+    const startIndex = +(searchParams.get("start") || 1);
 
   return (
     <Pagination className="mt-5">
