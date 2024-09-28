@@ -4,7 +4,13 @@ import WebSearchResults from "@/components/search/web-search-results";
 import dotenv from "dotenv";
 dotenv.config();
 
-const WebPage = async ({ searchParams }) => {
+type SearchParams = {
+  searchParams: {
+    start: number;
+    searchTerm: string;
+  };
+};
+const WebPage = async ({ searchParams }: SearchParams) => {
   const startIndex = searchParams.start || 1;
   const q = searchParams.searchTerm;
   const results = await fetch(

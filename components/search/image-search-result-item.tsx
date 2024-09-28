@@ -1,27 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { Card, CardHeader, CardTitle } from "../ui/card";
-
-const ImageSearchResultItem = ({ item }: any) => {
-  console.log(item);
+type Item = {
+  link: string;
+  title: string;
+  href: string;
+  displayLink: string;
+};
+const ImageSearchResultItem = ({ link, title, href, displayLink }: Item) => {
   return (
     <Card className="flex h-60 w-full flex-col gap-y-3 overflow-hidden p-2 sm:max-w-[280px]">
       <div className="h-4/5 w-full overflow-hidden rounded-lg">
-        <img
-          src={item.link}
-          alt={item.title}
-          className="h-full w-full object-fill"
-        />
+        <img src={link} alt={title} className="h-full w-full object-fill" />
       </div>
-      <Link
-        href={item.image.contextLink}
-        className="group flex flex-col text-sm"
-      >
-        <span className="group-hover:underline">{item.displayLink}</span>
+      <Link href={href} className="group flex flex-col text-sm">
+        <span className="group-hover:underline">{displayLink}</span>
 
         <CardHeader className="p-0">
           <CardTitle className="text-md font-normal">
-            {item.title.slice(0, 20) + "..."}
+            {title.slice(0, 20) + "..."}
           </CardTitle>
         </CardHeader>
       </Link>

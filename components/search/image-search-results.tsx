@@ -1,10 +1,29 @@
 import ImageSearchResultItem from "./image-search-result-item";
 
-const ImageSearchResults = ({ results }: { results: any }) => {
+type Item = {
+  displayLink: string;
+  image: {
+    contextLink: string;
+  };
+  link: string;
+  title: string;
+};
+type Results = {
+  results: {
+    items: [];
+  };
+};
+const ImageSearchResults = ({ results }: Results) => {
   return (
-    <section className="flex w-full flex-wrap gap-3 justify-center">
-      {results?.items?.map((item, index) => (
-        <ImageSearchResultItem key={index} item={item} />
+    <section className="flex w-full flex-wrap justify-center gap-3">
+      {results?.items?.map((item: Item, index: number) => (
+        <ImageSearchResultItem
+          key={index}
+          displayLink={item.displayLink}
+          href={item.image.contextLink}
+          link={item.link}
+          title={item.title}
+        />
       ))}
     </section>
   );

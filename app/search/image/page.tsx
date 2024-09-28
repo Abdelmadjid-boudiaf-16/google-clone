@@ -4,7 +4,13 @@ import NoSearchResult from "@/components/search/result-not-found";
 import dotenv from "dotenv";
 dotenv.config();
 
-const ImageSearchPage = async ({ searchParams }) => {
+type SearchParams = {
+  searchParams: {
+    start: number;
+    searchTerm: string;
+  };
+};
+const ImageSearchPage = async ({ searchParams }: SearchParams) => {
   const startIndex = searchParams.start || 1;
   const q = searchParams.searchTerm;
   const results = await fetch(
