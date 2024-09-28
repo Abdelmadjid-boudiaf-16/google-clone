@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const WebPage = async ({ searchParams }) => {
-  const startIndex = searchParams.start || 1
+  const startIndex = searchParams.start || 1;
   const q = searchParams.searchTerm;
   const results = await fetch(
     `https://www.googleapis.com/customsearch/v1?key=${process.env.SEARCH_API_KEY}&cx=${process.env.CX_KEY}&q=${q}&start=${startIndex}`,
