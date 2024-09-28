@@ -17,8 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(prompt.className, "relative min-h-screen")}>
+      <body className={cn(prompt.className, "relative min-h-screen flex flex-col")}>
+        <main className="grow">
+
         {children}
+        </main>
         <Footer />
       </body>
     </html>

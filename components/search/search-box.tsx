@@ -6,14 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { BiSearch } from "react-icons/bi";
 import { MdKeyboardVoice } from "react-icons/md";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Card } from "../ui/card";
 import { searchSchema } from "@/utils/search-schema";
 
 const SearchBox = () => {
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("searchTerm");
-
+  const pathname = usePathname();
   const router = useRouter();
   const form = useForm<z.infer<typeof searchSchema>>({
     resolver: zodResolver(searchSchema),
@@ -25,7 +25,7 @@ const SearchBox = () => {
   const onSubmit = (data: z.infer<typeof searchSchema>) => {
     const { inputSearch } = data;
     if (inputSearch.trim().length < 1) return;
-    router.push(`/search/web?searchTerm=${inputSearch}`);
+    router.push(`${pathname}?searchTerm=${inputSearch}`);
   };
   return (
     <Form {...form}>
